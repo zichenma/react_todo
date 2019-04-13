@@ -13,7 +13,7 @@ class App extends Component {
     render () {
         return (
         <Fragment>
-            <div className={this.state.show ? 'show' : 'hide'}>Hello</div>
+            <div className={this.state.show ? 'show' : 'hide'}><h1>Hello</h1></div>
             <button onClick={this.handleToggle}>Toggle</button>
         </Fragment>
         );
