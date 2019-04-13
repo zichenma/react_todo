@@ -1,40 +1,36 @@
-.show {
-    transition: show-item 2s ease-in forwards;
-}
-
-/* forwards can sort last frame style (e.g. {100% {opacity: 0; color: blue;}) */
-
-.hide {
+/* 入场动画（刚要执行的一瞬间） */
+/* .fade-appear 保证了第一次刷新页面也会有同样的效果。
+需要与appear={true}一起使用 */
+.fade-enter, .fade-appear {
     opacity: 0;
-    animation: hide-item 2s ease-in forwards;
 }
 
-@keyframes show-item {
-    0% {
-       opacity: 0;
-       color: red; 
-    }
-    50% {
-        opacity: 0.5;
-        color: green;
-    }
-    100% {
-        opacity: 1;
-        color: blue;
-    }
+/* 入场动画执行的第二个时刻到入场动画执行完成之前的一个时刻 */
+.fade-enter-active, .fade-appear-active {
+    opacity: 1;
+    transition: opacity 1s ease-in;
 }
 
-@keyframes hide-item {
-    0% {
-       opacity: 1;
-       color: red; 
-    }
-    50% {
-        opacity: 0.5;
-        color: green;
-    }
-    100% {
-        opacity: 0;
-        color: blue;
-    }
+ /* 入场动画执行完成之后执行 */
+.fade-enter-done {
+    opacity: 1;
+    /* 也可以用js实现颜色变化 */
+    /* color: red; */
 }
+
+/* 出场动画执行的第一个时刻 */
+.fade-exit {
+    opacity: 1;
+}
+
+/* 出场动画执行的过程中 */
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+/* 出场动画结束 */
+.fade-exit-done {
+    opacity: 0;
+}
+
