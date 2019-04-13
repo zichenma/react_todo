@@ -1,38 +1,49 @@
 import React, { Component, Fragment } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './style.css';
 
 class App extends Component {
 
-    state = {show: true};
+    state = {
+        list: []
+    };
 
     constructor(props) {
         super(props);
-        this.handleToggle = this.handleToggle.bind(this);
+        this.handleAddItem = this.handleAddItem.bind(this);
     }
 
     render () {
         return (
         <Fragment>
-            {/* unmountOnExit 可以将DOM删除，当完成动画后 */}
-            <CSSTransition
-                in={this.state.show}
-                timeout={1000}
-                classNames='fade'
-                unmountOnExit
-                onEntered={(el) => el.style.color='blue'}
-                appear={true}
-            >
-                <h1>Hello</h1>
-            </CSSTransition>
-            <button onClick={this.handleToggle}>Toggle</button>
+         <TransitionGroup>
+            {
+                this.state.list.map((item, index) => {
+                    return (
+                        <CSSTransition
+                            timeout={1000}
+                            classNames='fade'
+                            unmountOnExit
+                            onEntered={(el) => el.style.color='blue'}
+                            appear={true}
+                            key={index}
+                        >
+                        <div ><h1>{item}</h1></div>
+                        </CSSTransition>
+                    )
+                })
+            }
+         </TransitionGroup>
+        <button onClick={this.handleAddItem}>Toggle</button>
         </Fragment>
         );
     }
 
-    handleToggle() {
-        this.setState({
-            show: this.state.show = !this.state.show
+    handleAddItem() {
+        this.setState(preState => {
+            return {
+                list: [...preState.list, 'item']
+            }
         })
     }
 }
