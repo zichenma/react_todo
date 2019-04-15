@@ -2,7 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Input, Button, List, Typography } from 'antd';
 // 自动默认去找index.js
-import store from './store'
+import store from './store';
 
 
 class TodoList extends React.Component {
@@ -30,6 +30,13 @@ class TodoList extends React.Component {
         }
         store.dispatch(action);
     }
+    handleItemDelete(index) {
+        const action = {
+            type: 'delete_todo_item',
+            index
+        }
+        store.dispatch(action);
+    }
     render() {
         return (
             <div style={{marginTop: '10px', marginLeft:'10px'}}> 
@@ -45,7 +52,8 @@ class TodoList extends React.Component {
                 <List style={{marginTop: '10px', width: '300px'}}
                     bordered
                     dataSource={this.state.list}
-                    renderItem={item => (<List.Item><Typography.Text mark>[ITEM]</Typography.Text> {item}</List.Item>)}
+                    renderItem={(item, index) => (<List.Item><Typography.Text mark></Typography.Text> {item} 
+                    <button type="primary" onClick={this.handleItemDelete.bind(this, index)} style={{marginLeft: '10px'}}>Delete</button></List.Item>)}
                 />
             </div>
         )

@@ -1,26 +1,28 @@
 const defaultState = {
-    inputValue: '',
-    list: []
-};
+    inputValue : '',
+    items: []
+}
 
-// reducer 可以接受state，但是绝对不能修改state
 export default (state = defaultState, action) => {
-    if (action.type === 'change_input_value') {
-        // deep copy
+    if (action.type === 'input_change') {
         const newState = JSON.parse(JSON.stringify(state));
-        newState.inputValue = action.value;
+        newState.inputValue = action.payload.value;
         return newState;
     }
-    if (action.type === 'add_todo_item') {
+
+    if (action.type === 'add_item') {
         const newState = JSON.parse(JSON.stringify(state));
-        newState.list.push(newState.inputValue);
+        newState.items = [...state.items, newState.inputValue];
         newState.inputValue = '';
         return newState;
     }
-    if (action.type === 'delete_todo_item') {
+
+    if (action.type === 'delete_item') {
         const newState = JSON.parse(JSON.stringify(state));
-        newState.list.splice(action.index, 1);
+        newState.items.splice(action.payload.value, 1);
         return newState;
     }
+
     return state;
 }
+
