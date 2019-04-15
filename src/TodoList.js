@@ -3,8 +3,7 @@ import 'antd/dist/antd.css';
 import { Input, Button, List, Typography } from 'antd';
 // 自动默认去找index.js
 import store from './store';
-import {CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM} from './store/actionTypes';
-
+import { getInputChangeAction, getAddItemAction, getHandleItemDelete } from './store/actionCreators';
 
 class TodoList extends React.Component {
     state = store.getState();
@@ -16,27 +15,18 @@ class TodoList extends React.Component {
         store.subscribe(this.handleStoreChange);
     }
     handleInputChange (e) {
-        const action = {
-            // 意义在于 变量 出错IDE能报错，而简单的字符串则不能
-            type: 'CHANGE_INPUT_VALUE',
-            value: e.target.value
-        }
+        const action = getInputChangeAction(e.target.value);
         store.dispatch(action);
     }
     handleStoreChange () {
         this.setState(store.getState());
     }
     handleBtnClick() {
-        const action = {
-            type: 'ADD_TODO_ITEM'
-        }
+        const action = getAddItemAction();
         store.dispatch(action);
     }
     handleItemDelete(index) {
-        const action = {
-            type: 'DELETE_TODO_ITEM',
-            index
-        }
+        const action = getHandleItemDelete(index);
         store.dispatch(action);
     }
     render() {
