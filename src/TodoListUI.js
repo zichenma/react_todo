@@ -19,7 +19,7 @@ const TodoListUI = ({inputValue, list, handleBtnClick, handleInputChange, handle
                         bordered
                         dataSource={list}
                         renderItem={(item, index) => (<List.Item><Typography.Text mark></Typography.Text> {item.value} 
-                        <button type="primary" onClick={index => {handleItemDelete(index)}} style={{marginLeft: '10px'}}>Delete</button></List.Item>)}
+                        <button type="primary" onClick={() => {handleItemDelete(index)}} style={{marginLeft: '10px'}}>Delete</button></List.Item>)}
                     />
                 </div>
         )
