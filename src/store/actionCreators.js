@@ -20,24 +20,14 @@ export const initListAction = data => ({
     data
 })
 // 正常情况下，只能return一个对象，但是用thunk之后可以return一个函数
-export const getTodoList = () => {
-    return (dispatch) => {
-        const uri = `http://localhost:3200/`;
-        axios.get(`${uri}todos`).then(res => {
-            const data = res.data;
-            const action = initListAction(data);
-            dispatch(action);
-        });
 
+export const getTodoList = () => {
+    return async (dispatch) => {
+        const uri = `http://localhost:3200/`;
+        const response = await axios.get(`${uri}todos`).catch(err => console.log(err));
+        const data = response.data;
+        const action = initListAction(data);
+        dispatch(action);
     }
 }
-
-// export const getTodoList = () => {
-//     return async (dispatch) => {
-//         const uri = `http://localhost:3200/`;
-//         const response = await axios.get(`${uri}todos`).catch(err => console.log(err));
-//         const action = initListAction(response.data);
-//         dispatch(action);
-//     }
-// }
 
