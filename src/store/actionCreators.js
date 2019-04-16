@@ -24,7 +24,8 @@ export const initListAction = data => ({
 export const getTodoList = () => {
     return async (dispatch) => {
         const uri = `http://localhost:3200/`;
-        const response = await axios.get(`${uri}todos`).catch(err => console.error(err));
+        const response = await axios.get(`${uri}todos`)
+              .catch(err => console.error(err));
         const data = response.data;
         const action = initListAction(data);
         dispatch(action);
