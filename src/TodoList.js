@@ -1,63 +1,31 @@
-import React from 'react';
-// 自动默认去找index.js
-
+import React, { Component } from 'react';
 import store from './store';
-import { 
-    getInputChangeAction, 
-    getAddItemAction, 
-    getHandleItemDelete,
-    getInitList
-    }
-from './store/actionCreators';
-import TodoListUI from './TodoListUI';
+import { connect } from 'react-redux';
 
-class TodoList extends React.Component {
-    state = store.getState();
-    constructor(props) {
-        super(props);
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleStoreChange = this.handleStoreChange.bind(this);
-        this.handleBtnClick = this.handleBtnClick.bind(this);
-        this.handleItemDelete = this.handleItemDelete.bind(this);
-        store.subscribe(this.handleStoreChange);
-    }
-    handleInputChange (e) {
-        const action = getInputChangeAction(e.target.value);
-        store.dispatch(action);
-    }
-    handleStoreChange () {
-        this.setState(store.getState());
-    }
-    handleBtnClick() {
-        const action = getAddItemAction();
-        store.dispatch(action);
-    }
-    handleItemDelete(index) {
-        const action = getHandleItemDelete(index);
-        store.dispatch(action);
-    }
-    render() {
-        return <TodoListUI 
-            inputValue={this.state.inputValue}
-            list={this.state.list}
-            handleInputChange={this.handleInputChange}
-            handleBtnClick={this.handleBtnClick}
-            handleItemDelete={this.handleItemDelete}
-        />;
-    }
+class TodoList extends Component {
 
-    componentDidMount () {
-        const action = getInitList();
-        store.dispatch(action);
-    }
-
-    // async getTodoList () {
-      
+    // state = store.getState();
+    // constructor(props) {
+    //     super(props);
     // }
-
-
-  
-
+    render() {
+        return (
+            <div>
+                <div>
+                    <input type="text" value={this.state.inputValue}/>
+                    <button>Add</button>
+                </div>
+                <ul>
+                    <li>Dell</li>
+                </ul>
+            </div>
+        )
+    }
 }
+const mapStateToProps = (state) => {
+    return {
 
-export default TodoList;
+    }
+}
+// 让TodoList这个组件和Store进行连接
+export default connect(null, null)(TodoList);
