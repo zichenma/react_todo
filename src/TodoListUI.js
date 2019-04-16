@@ -2,28 +2,27 @@ import React from 'react';
 import { Input, Button, List, Typography } from 'antd';
 import 'antd/dist/antd.css';
 
-class TodoListUI extends React.Component {
-    render() {
+const TodoListUI = ({inputValue, list, handleBtnClick, handleInputChange, handleItemDelete}) => {
+
         return (
                <div style={{marginTop: '10px', marginLeft:'10px'}}> 
                     <div>
                         <Input 
-                        value={this.props.inputValue} 
+                        value={inputValue} 
                         placeholder="todo info" 
                         style={{width: '300px', marginRight: '10px'}}
-                        onChange={this.props.handleInputChange}
+                        onChange={handleInputChange}
                         />
-                        <Button onClick={this.props.handleBtnClick} type="primary">Submit</Button>
+                        <Button onClick={handleBtnClick} type="primary">Submit</Button>
                     </div>
                     <List style={{marginTop: '10px', width: '300px'}}
                         bordered
-                        dataSource={this.props.list}
+                        dataSource={list}
                         renderItem={(item, index) => (<List.Item><Typography.Text mark></Typography.Text> {item} 
-                        <button type="primary" onClick={index => {this.props.handleItemDelete(index)}} style={{marginLeft: '10px'}}>Delete</button></List.Item>)}
+                        <button type="primary" onClick={index => {handleItemDelete(index)}} style={{marginLeft: '10px'}}>Delete</button></List.Item>)}
                     />
                 </div>
         )
-    }
+    
 }
-
 export default TodoListUI;
