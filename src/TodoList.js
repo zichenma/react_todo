@@ -54,7 +54,8 @@ class TodoList extends React.Component {
     async getTodos () {
         const uri = `http://localhost:3200/`;
         const response = await axios.get(`${uri}todos`).catch(err => console.log(err));
-        const action = initListAction(response);
+        const data = response.data;
+        const action = initListAction(data);
         store.dispatch(action);
     }
 
