@@ -1,14 +1,11 @@
 import React from 'react';
-import axios from 'axios';
-
-
 // 自动默认去找index.js
 import store from './store';
 import { 
     getInputChangeAction, 
     getAddItemAction, 
     getHandleItemDelete, 
-    initListAction} 
+    getTodoList} 
 from './store/actionCreators';
 import TodoListUI from './TodoListUI';
 
@@ -48,15 +45,11 @@ class TodoList extends React.Component {
     }
 
     componentDidMount () {
-        this.getTodos();
+       const action = getTodoList();
+       store.dispatch(action);
     }
 
-    async getTodos () {
-        const uri = `http://localhost:3200/`;
-        const response = await axios.get(`${uri}todos`).catch(err => console.log(err));
-        const action = initListAction(response);
-        store.dispatch(action);
-    }
+  
 
 }
 

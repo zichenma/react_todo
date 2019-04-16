@@ -1,4 +1,5 @@
 import {CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM, INIT_LIST_ACTION} from './actionTypes';
+import axios from 'axios';
 
 export const getInputChangeAction = value => ({
     type: CHANGE_INPUT_VALUE,
@@ -18,3 +19,25 @@ export const initListAction = data => ({
     type: INIT_LIST_ACTION,
     data
 })
+// 正常情况下，只能return一个对象，但是用thunk之后可以return一个函数
+export const getTodoList = () => {
+    return (dispatch) => {
+        const uri = `http://localhost:3200/`;
+        axios.get(`${uri}todos`).then(res => {
+            const data = res.data;
+            const action = initListAction(data);
+            dispatch(action);
+        });
+
+    }
+}
+
+// export const getTodoList = () => {
+//     return async (dispatch) => {
+//         const uri = `http://localhost:3200/`;
+//         const response = await axios.get(`${uri}todos`).catch(err => console.log(err));
+//         const action = initListAction(response.data);
+//         dispatch(action);
+//     }
+// }
+
