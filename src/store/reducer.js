@@ -24,7 +24,7 @@ export default (state = defaultState, action) => {
     }
     if (action.type === ADD_TODO_ITEM) {
         const newState = JSON.parse(JSON.stringify(state));
-        newState.list.push(newState.inputValue);
+        newState.list.push({value: newState.inputValue, isComplete: false});
         newState.inputValue = '';
         return newState;
     }
