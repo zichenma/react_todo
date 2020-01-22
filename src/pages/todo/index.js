@@ -22,15 +22,15 @@ const Todo = () => {
         actionCreators.removeItem(dispatch, index);
     }
 
-    function handleItemChecked(index) {
-        actionCreators.checkItem(dispatch, index);
+    function handleItemChecked(e, index) {
+        actionCreators.checkItem(dispatch, {idx : index, isCompleted : e.target.checked});
     }
 
     return (
         <>
           <input type="text" value={value} onChange={handleOnchange} />
           <button onClick={handleAddItem}>+</button>
-          <List items={list} handleClick={handleRemoveItem} isCompeted={false} handleChecked={handleItemChecked}/>
+          <List items={list} handleClick={handleRemoveItem}  handleChecked={handleItemChecked}/>
         </>
     )
 }

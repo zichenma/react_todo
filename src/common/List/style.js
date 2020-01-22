@@ -11,4 +11,7 @@ ListWrapper.item = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    li {       
+          text-decoration :  ${props =>  props.isCompleted ? 'line-through' :  'none' }          
+    }
 `;
